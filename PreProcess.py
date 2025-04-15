@@ -12,9 +12,6 @@ print(heart_disease.variables)
 
 #%%
 import pandas as pd
-import numpy as np
-import seaborn as sns
-import matplotlib.pyplot as plt
 import plotly.express as px
 
 #%%
@@ -72,10 +69,33 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 print(f"Training set:   X = {X_train.shape}, y = {y_train.shape}")
 print(f"Test set:       X = {X_test.shape},  y = {y_test.shape}")
  
-
+#%%
+y_train = y_train.to_numpy().ravel()
+y_test = y_test.to_numpy().ravel()
 # %% Save data
 import pickle
 
 with open('data_heartdisease.pkl', mode='wb') as f:
     pickle.dump([X_train, X_test, y_train, y_test], f)
 
+
+# %% --------- Dataset for binary problem ---------
+# 0: no diagnosis, 1: one or more diagnoses
+yb = y.where(y == 0, 1)
+print(yb.value_counts())
+
+# %% Data division
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, yb_train, yb_test = train_test_split(X, yb, test_size=0.25, random_state=0)
+
+print(f"Training set:   X = {X_train.shape}, y = {yb_train.shape}")
+print(f"Test set:       X = {X_test.shape},  y = {yb_test.shape}")
+
+#%%
+yb_train = yb_train.to_numpy().ravel()
+yb_test = yb_test.to_numpy().ravel()
+# %% Save data
+
+with open('data_heartdisease_bin.pkl', mode='wb') as f:
+    pickle.dump([X_train, X_test, yb_train, yb_test], f)
