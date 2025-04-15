@@ -49,6 +49,21 @@ X.loc[(X['age']>100) | (X['age']<1)]
 X.loc[(X['ca'].isna())] = 0
 X.loc[(X['thal'].isna())] = 3
 
+#%% OneHotEncoder
+from sklearn.preprocessing import OneHotEncoder
+from sklearn.compose import ColumnTransformer
+# %%
+onehotencoder_hd= ColumnTransformer(transformers=[('OneHot', OneHotEncoder(), [1,2,5,6,8,10,11,12] )], remainder='passthrough' )
+# %%
+X = onehotencoder_hd.fit_transform(X)
+X[0:5]
+
+# %% Standardization
+from sklearn.preprocessing import StandardScaler
+scaler_hd = StandardScaler()
+X = scaler_hd.fit_transform(X)
+X[0]
+
 # %% Data division
 from sklearn.model_selection import train_test_split
 
@@ -56,9 +71,11 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random
 
 print(f"Training set:   X = {X_train.shape}, y = {y_train.shape}")
 print(f"Test set:       X = {X_test.shape},  y = {y_test.shape}")
+ 
 
 # %% Save data
 import pickle
 
 with open('data_heartdisease.pkl', mode='wb') as f:
     pickle.dump([X_train, X_test, y_train, y_test], f)
+
