@@ -23,7 +23,7 @@ O objetivo é **construir e comparar diferentes classificadores de machine learn
 - Conversão do problema para classificação **binária** (`0`: sem doença, `1`: com doença)
 - Pré-processamento com `OneHotEncoder` e `StandardScaler`
 - Exportação dos dados tratados para `.pkl`
-- Classificação com **Regressão Logística**
+- Classificação com **Regressão Logística** e **Random Forest**
 - Validação cruzada com **tuning de hiperparâmetros** via `GridSearchCV`
 
 ---
@@ -71,7 +71,7 @@ The goal is to **build and compare different ML classifiers** to predict heart d
 - Conversion to **binary classification** (`0`: no disease, `1`: has disease)
 - Preprocessing with `OneHotEncoder` and `StandardScaler`
 - Export of processed data to `.pkl`
-- Classification using **Logistic Regression**
+- Classification using **Logistic Regression** and **Random Forest**
 - Cross-validation and **hyperparameter tuning** with `GridSearchCV`
 
 ---
